@@ -1,0 +1,96 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: azure;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    grid-template-rows: 1fr 10fr;
+}
+
+.container .field {
+    grid-area: 2 / 1 / -1 / 2;
+    align-self: center;
+    justify-self: center;
+
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-template-rows: repeat(3, 200px);
+    background-color: white;
+}
+
+.container .players {
+    grid-area: 2 / 2 / -1 / -1;
+}
+
+.container .gameName {
+    grid-area: 1 / 1 / 2 / 3;
+    font-size: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.container .gameName > * {
+    padding-top: 2rem;
+    margin: 0;
+}
+
+.field > * {
+    display: flex;
+    border: 2px solid black;
+    justify-content: center;
+    align-items: center;
+}
+
+.field {
+    border: 2px solid black;
+}
+
+.container .players {
+    display: flex;
+    flex-direction: column;
+    padding-top: 7rem;
+    margin-top: 0;
+    gap: 10px;
+    font-size: 60px;
+    align-items: flex-start;
+}
+
+.container h2 {
+    font: inherit;
+}
+
+
+.container .field {
+    font-size: 100px;
+
+    transition: transform 0.9s, background-color 2s;
+}
+
+.container .field div:hover {
+    border: 3px rgb(106, 255, 106) solid;
+    background-color: rgb(207, 207, 207);
+    color: rgb(114, 114, 114);
+}
+
+.container .field div {
+    transition: background-color 0.7s;
+}
+
+.container .field:hover {
+    transform: translateY(-2%);
+    border: 3px black solid;
+}
+
+
+
+
