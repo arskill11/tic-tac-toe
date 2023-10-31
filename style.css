@@ -2,7 +2,7 @@ html,
 body {
     height: 100%;
     width: 100%;
-    padding: 0;
+    padding: 0 0 60px 0;
     margin: 0;
     background-color: azure;
 }
@@ -11,37 +11,94 @@ body {
     width: 100%;
     height: 100%;
     display: grid;
-    grid-template-columns: 7fr 3fr;
-    grid-template-rows: 1fr 10fr;
+    grid-template-columns: 3fr 6fr 3fr;
+    grid-template-rows: 2fr 10fr 2fr 2fr;
 }
 
 .container .field {
-    grid-area: 2 / 1 / -1 / 2;
+    grid-area: 2 / 1 / 3 / -1;
     align-self: center;
     justify-self: center;
 
     display: grid;
     grid-template-columns: repeat(3, 200px);
     grid-template-rows: repeat(3, 200px);
-    background-color: white;
-}
 
-.container .players {
-    grid-area: 2 / 2 / -1 / -1;
+    border: 2px solid black;
+    background-color: white;
+    font-size: 100px;
+
+    transition: transform 0.9s, background-color 2s;
 }
 
 .container .gameName {
-    grid-area: 1 / 1 / 2 / 3;
+    grid-area: 1 / 2 / 2 / 3;
+
+    justify-content: flex-start;
+}
+
+
+.container form {
+    grid-area: 3 / 1 / 4 / 4;
+}
+
+.container .btns {
+    grid-area: 4 / 1 / 5 / 4;
+}
+
+.container form {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .btns {
+    display: flex;
+    gap: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .gameName,
+.container .player{
     font-size: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
-.container .gameName > * {
-    padding-top: 2rem;
+.container .gameName > *,
+.container .player {
+    padding: 2rem;
     margin: 0;
+}
+
+.container .player {
+    margin-top: 3rem;
+}
+
+.container .gameName .winHead {
+    height: 30%;
+}
+
+.container form input {
+    height: 1.5rem;
+    width: 100%;
+    border-radius: 15px;
+    padding-left: 12px;
+    font-size: 1.2rem;
+}
+
+.container form .inpt {
+    width: 13%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    gap: 4px;
+    font-size: 1.3rem;
 }
 
 .field > * {
@@ -51,31 +108,9 @@ body {
     align-items: center;
 }
 
-.field {
-    border: 2px solid black;
-}
-
-.container .players {
-    display: flex;
-    flex-direction: column;
-    padding-top: 7rem;
-    margin-top: 0;
-    gap: 10px;
-    font-size: 60px;
-    align-items: flex-start;
-}
-
 .container h2 {
     font: inherit;
 }
-
-
-.container .field {
-    font-size: 100px;
-
-    transition: transform 0.9s, background-color 2s;
-}
-
 .container .field div:hover {
     border: 3px rgb(106, 255, 106) solid;
     background-color: rgb(207, 207, 207);
@@ -90,6 +125,58 @@ body {
     transform: translateY(-2%);
     border: 3px black solid;
 }
+
+
+.container .btns {
+    margin-top: 30px;
+}
+.container .btns button,
+.dialog button {
+    width: 7rem;
+    height: 3rem;
+    border-radius: 20px;
+    background-color: rgb(100, 173, 255);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 900;
+
+    transition: background-color 0.7s;
+}
+
+.container .btns button:hover,
+.dialog button:hover {
+    background-color: rgb(99, 99, 255);
+}
+
+.container .player .green {
+    color: rgb(40, 174, 40);
+    text-shadow: black 2px 2px;
+    font-weight: bold;
+    font-size: 60px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.dialog {
+    position: absolute;
+    width: 60%;
+    height: 20%;
+    text-align: center;
+    border-radius: 15px;
+    background-color: azure;
+}
+
+.dialog .congrats {
+    font-size: 3rem;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    padding: 30px;
+}
+
+dialog::backdrop {
+    backdrop-filter: blur(6px);
+}
+
 
 
 

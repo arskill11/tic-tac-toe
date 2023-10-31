@@ -9,33 +9,55 @@
 <body>
     <script src="script.js" defer></script>
 
+    <dialog class="dialog">
+        <div class="congrats"></div>
+        <button class="close">Admit</button>
+    </dialog>
+
     <div class="container">
         <div class="gameName">
             <h1>Tic Tac Toe</h1>
-            <button class="hi">Hi</button>
-            <button class="rr">rr</button>
-            <h2 class="winHead"></h2>
         </div>
 
-        <div class="players">
-            <div class="player">
-            </div>
-            <h2 class="mark"></h2>
+        <div class="player">
+            <div class="playerOneName"></div>
+            <div class="marker">X</div>
         </div>
 
+        <div class="player">
+            <div class="playerTwoName"></div>
+            <div class="marker">O</div>
+        </div>
 
+        <div class="field">
+            <!--<div class="cell">X</div>
+            <div class="cell">X</div>
+            <div class="cell">X</div>
+            <div class="cell">X</div>
+            <div class="cell">X</div>
+            <div class="cell">X</div>
+            <div class="cell">X</div>
+            <div class="cell">X</div>
+            <div class="cell">X</div>-->
+        </div>
 
-            <div class="field">
-                <!--<div class="cell">X</div>
-                <div class="cell">X</div>
-                <div class="cell">X</div>
-                <div class="cell">X</div>
-                <div class="cell">X</div>
-                <div class="cell">X</div>
-                <div class="cell">X</div>
-                <div class="cell">X</div>
-                <div class="cell">X</div>-->
+        <form action="#" method="get">
+            <div class="inpt">
+                <label for="nameOne">Player 1</label>
+                <input type="text" id="nameOne" name="nameOne">
             </div>
+
+            <div class="inpt">
+                <label for="nameTwo">Player 2</label>
+                <input type="text" id="nameTwo" name="nameTwo">
+            </div>
+        </form>
+
+        <div class="btns">
+            <button class="start">Start</button>
+            <button class="restart">Restart</button>
+        </div>
+        
     </div>
 
     

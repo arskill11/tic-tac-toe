@@ -3,9 +3,22 @@ function Player (playerName, marker) {
 }
 
 const game = (() => {
-    const winnerHeading = document.querySelector('.winHead');
-    const player = document.querySelector('.player');
-    const playerMark = document.querySelector('.mark');
+    const clickToStart = document.createElement('div');
+    const container = document.querySelector('.container');
+    const playerOneName = document.querySelector('.playerOneName');
+    const playerTwoName = document.querySelector('.playerTwoName');
+    const inputNameOne = document.querySelector('#nameOne');
+    const inputNameTwo = document.querySelector('#nameTwo');
+    const dialog = document.querySelector('.dialog');
+    const congratsOnWin = document.querySelector('.congrats');
+    const dialogCloseBtn = document.querySelector('.close')
+    .addEventListener('click', () => {
+        dialog.close();
+    })
+
+    clickToStart.textContent = "CLICK THE START BUTTON TO START THE GAME";
+    clickToStart.setAttribute('style', 'font-size: 30px; color:black; position: absolute; top:45%; left: 35%; right: 35%; text-align:center;');
+    container.appendChild(clickToStart);
 
     let playerOne;
     let playerTwo;
@@ -14,12 +27,23 @@ const game = (() => {
     let winnerClaimed;
 
     function start () {
-        playerOne = Player ('Player One', 'X');
-        playerTwo = Player ('Player Two', 'O');
+        playerOne = Player (inputNameOne.value || 'Player One', 'X');
+        playerTwo = Player (inputNameTwo.value || 'Player Two', 'O');
+
+        playerOneName.textContent = playerOne.playerName;
+        playerTwoName.textContent = playerTwo.playerName;
+        playerOneName.classList.add('green');
+
+        inputNameOne.value = '';
+        inputNameTwo.value = '';
 
         currentPlayer = playerOne;
         freeCells = 9;
         winnerClaimed = false;
+
+        if (container.contains(clickToStart)){
+            container.removeChild(container.lastChild);
+        }
 
         gameBoard.render();
     }
@@ -33,6 +57,8 @@ const game = (() => {
             gameBoard.gameField.removeChild(gameBoard.gameField.lastChild);
         }    
 
+        playerOneName.classList.remove('green');
+        playerTwoName.classList.remove('green');
         start();
     }
 
@@ -58,9 +84,10 @@ const game = (() => {
             if (gameBoard.board[pattern[0]]  === currentPlayer.marker &&
                 gameBoard.board[pattern[1]] === currentPlayer.marker &&
                 gameBoard.board[pattern[2]]  === currentPlayer.marker) {
-                    winnerHeading.textContent = `The winner is ${currentPlayer.playerName}`;
                     winnerClaimed = true;
                     markWinLine(pattern);
+                    dialog.showModal();
+                    congratsOnWin.textContent = `${currentPlayer.playerName} is the winner!`;
                 }
         })
     }
@@ -79,14 +106,20 @@ const game = (() => {
     }
 
     function switchPlayer () {
+        if (currentPlayer == playerOne) {
+            playerOneName.classList.remove('green');
+            playerTwoName.classList.add('green');
+        } else if (currentPlayer == playerTwo) {
+            playerTwoName.classList.remove('green');
+            playerOneName.classList.add('green');
+        }
         currentPlayer === playerOne ? currentPlayer = playerTwo : currentPlayer = playerOne;
-        player.textContent = `${currentPlayer.playerName}, it's your turn!`;
-        playerMark.textContent = `Your mark: ${currentPlayer.marker}`;
     }
 
     function claimTie () {
-        winnerHeading.textContent = 'That\' a tie';
         winnerClaimed = true;
+        dialog.showModal();
+        congratsOnWin.textContent = `Ir's a tie`;
     }
 
     function handleCLick(event) {
@@ -158,82 +191,16 @@ const gameBoard = (() => {
     };
 })();
 
-
-const btnStart = document.querySelector('.hi');
+const btnStart = document.querySelector('.start');
 btnStart.addEventListener('click', handleStart);
 function handleStart (e) {
     game.start();
     e.target.removeEventListener('click', handleStart);
 }
 
-const btnRestart = document.querySelector('.rr')
+const btnRestart = document.querySelector('.restart')
     .addEventListener('click', () => {
         game.restart();
 })
 
-
-/*const game =  (() => {
-    const playerOne = Player('Player One', 'X');
-    const playerTwo = Player('Player Two', 'O');
-
-    let currentPlayer = playerOne;
-    let freeCells = 9;
-    let winnerClaimed = false;
-
-    const winnigPattern = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [2, 4, 6],
-        [0, 4, 8],
-    ];
-
-    const winnerHeading = document.querySelector('.winHead');
-
-    function checkWinner () {
-        winnigPattern.forEach(pattern => {
-            if (gameBoard.board[pattern[0]] === '' ||
-                gameBoard.board[pattern[1]]  === '' ||
-                gameBoard.board[pattern[2]]  === '' ) { 
-                    return;
-                }
-
-            if (gameBoard.board[pattern[0]]  === this.currentPlayer.marker &&
-                gameBoard.board[pattern[1]] === this.currentPlayer.marker &&
-                gameBoard.board[pattern[2]]  === this.currentPlayer.marker) {
-                    winnerHeading.textContent = `The winner is ${this.currentPlayer.playerName}`;
-                    this.winnerClaimed = true;
-                    
-                }
-        })
-    }
-
-    function botPlay () {
-
-    }
-
-    function switchPlayer () {
-        this.currentPlayer === playerOne ? this.currentPlayer = playerTwo : this.currentPlayer = playerOne;
-        gameBoard.player.textContent === '1st Player\'s turn' ? gameBoard.player.textContent = '2nd Player\s turn' : 
-            gameBoard.player.textContent = '1st Player\'s turn';
-
-        gameBoard.playerMark.textContent === 'marker: X' ? gameBoard.playerMark.textContent = 'marker: O': 
-            gameBoard.playerMark.textContent = 'marker: X';
-    }
-
-    function claimTie () {
-        winnerHeading.textContent = 'That\' a tie';
-    }
-    return {
-        currentPlayer,
-        freeCells,
-        winnerClaimed,
-        checkWinner,
-        switchPlayer,
-        claimTie,
-    }
-})();*/
 
