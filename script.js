@@ -86,8 +86,8 @@ const game = (() => {
                 gameBoard.board[pattern[2]]  === currentPlayer.marker) {
                     winnerClaimed = true;
                     markWinLine(pattern);
-                    dialog.showModal();
                     congratsOnWin.textContent = `${currentPlayer.playerName} is the winner!`;
+                    setTimeout(() => {dialog.showModal()}, 1000);
                 }
         })
     }
@@ -118,8 +118,8 @@ const game = (() => {
 
     function claimTie () {
         winnerClaimed = true;
-        dialog.showModal();
-        congratsOnWin.textContent = `Ir's a tie`;
+        congratsOnWin.textContent = `It's a tie`;
+        setTimeout(() => {dialog.showModal()}, 1000);
     }
 
     function handleCLick(event) {
