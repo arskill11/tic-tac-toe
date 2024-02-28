@@ -12,11 +12,11 @@ const game = (() => {
     const dialog = document.querySelector('.dialog');
     const congratsOnWin = document.querySelector('.congrats');
     const dialogCloseBtn = document.querySelector('.close')
-    .addEventListener('click', () => {
-        dialog.close();
-    })
+        .addEventListener('click', () => {
+            dialog.close();
+        })
 
-    clickToStart.textContent = "CLICK THE START BUTTON TO START THE GAME";
+    clickToStart.textContent = "CLICK THE START BUTTON \nTO START THE GAME";
     clickToStart.setAttribute('style', 'font-size: 30px; color:black; position: absolute; top:45%; left: 35%; right: 35%; text-align:center;');
     container.appendChild(clickToStart);
 
@@ -159,10 +159,8 @@ const game = (() => {
     }
 })();
 
-
 const gameBoard = (() => {
     const gameField = document.querySelector('.field');
-
     let board = [];
     for (let i = 0; i < 9; i++){
         board.push('');
